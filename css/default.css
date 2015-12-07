@@ -22,7 +22,8 @@ div#background {
   opacity: 0.2;
 }
 
-div.opening {
+div.opening,
+div.tweet {
   opacity: 0;
 }
 
