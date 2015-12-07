@@ -50,7 +50,6 @@
       contentType: 'application/json',
       chache: false,
       dataType: "json",
-      async: false,
       scriptCharset: "utf-8",
       success: function(result, status){
 
