@@ -115,10 +115,9 @@
   }
   
   function scroll() {
-    var scrollH = $("#messageList").height();
-    $("#messageList").stop().animate({
-      "scrollTop":scrollH
-    }, 1500);
+    $("body, html").animate({
+      "scrollTop": $(document).height()
+    }, 1000);
   }
 
 
