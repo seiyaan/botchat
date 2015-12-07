@@ -24,6 +24,10 @@
       message.val("");
       button.attr("disabled", "disabled");
     });
+    
+    $('.opening').each(function(index){
+      $(this).delay(2000 * index).fadeTo("slow", 1.0);
+    });
   });
 
 
