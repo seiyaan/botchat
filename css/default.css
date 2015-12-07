@@ -22,6 +22,10 @@ div#background {
   opacity: 0.2;
 }
 
+div.opening {
+  opacity: 0;
+}
+
 div#messageListArea {
   width: 100%;
   position: relative;
