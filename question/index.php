@@ -25,9 +25,9 @@ echo $json;
 exit;
 
 /**
- * 回答集(CSV)から、質問に対する解答を見つけて返却する。
+ * 回答集(CSV)から、質問に対する回答を見つけて返却する。
  * @param $question String 質問
- * @return $answer String 解答
+ * @return $answer String 回答
 */
 function answer($question) {
   //返却するデータを初期化。
@@ -47,7 +47,7 @@ function answer($question) {
   }
   
   if ($answer === "") {
-    // 解答が見つからない場合は、とにかく謝る。謝るの大事。
+    // 回答が見つからない場合は、とにかく謝る。謝るの大事。
     // 社会人の基本。
     $answer = "ごめんね、わからない！勉強しておきます！";
   }
