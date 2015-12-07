@@ -33,16 +33,14 @@
       "message": message
     });
     
-    setTimeout(function() {
+    $("<div>", {
+      class: "me"
+    }).append(
       $("<div>", {
-        class: "me"
-      }).append(
-        $("<div>", {
-          class: "message",
-          text: message
-        })
-      ).stop().appendTo(messageList);
-    }, 1000);
+        class: "message",
+        text: message
+      })
+    ).stop().appendTo(messageList);
     scroll();
     
     $.ajax({
