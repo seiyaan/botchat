@@ -3,10 +3,10 @@
   "use strict";
   
   $(function () {
-    $("#messageList").animate({"opacity":1.0}, 1000);
     var TOUCH_EVENT = checkTouchEventType(),
         button = $("#sendMessageForm #send"),
-        message = $("#sendMessageForm #message");
+        message = $("#sendMessageForm #message"),
+        messageList = $("#messageList");
 
     if (message.val().length == 0) {
       button.attr("disabled", "disabled");
