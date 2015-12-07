@@ -19,7 +19,7 @@ div#background {
   left: 50%;
   margin-left: -384px;
   position: fixed;
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 div#messageListArea {
@@ -31,7 +31,6 @@ div#messageListArea section#messageList {
   margin: 0 auto;
   width: 600px;
   margin-bottom: 100px;
-  opacity: 0;
 }
 
 section#messageList .com {
