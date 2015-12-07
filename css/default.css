@@ -12,7 +12,7 @@ body {
 }
 
 div#background {
-  background: rgba(0, 0, 0, 0) url("../images/large_image.png") no-repeat scroll 0 -250px / 768px auto;
+  background: rgba(0, 0, 0, 0) url("../images/large_image.png") no-repeat scroll 0 -50px / 768px auto;
   height: 1084px;
   width: 768px;
   top:0;
