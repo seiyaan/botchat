@@ -46,7 +46,7 @@
     
     $.ajax({
       type: "POST",
-      url: "./question.php",
+      url: "./question/index.php",
       data: jsonMessage,
       contentType: 'application/json',
       chache: false,
