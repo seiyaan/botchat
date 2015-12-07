@@ -25,23 +25,20 @@
       button.attr("disabled", "disabled");
     });
   });
-  
-  
-  function sendMessage(message) {
+
+
+  /**
+   * 送信ボタンが押された時の処理。
+   * @param message String 投稿の内容
+   * @return void
+   **/
+  function sendMessage(msg) {
     var messageList = $("#messageList");
     var jsonMessage = JSON.stringify({
-      "message": message
+      "message": msg
     });
     
-    $("<div>", {
-      class: "me"
-    }).append(
-      $("<div>", {
-        class: "message",
-        text: message
-      })
-    ).stop().appendTo(messageList);
-    scroll();
+    userTweet(messageList, msg);
     
     $.ajax({
       type: "POST",
@@ -60,6 +57,26 @@
     });
     
   }
+
+
+  /**
+   * ユーザがつぶやきます
+   * @param target Elem 追加先
+   * @param msg String つぶやく内容
+   * @return void
+   **/
+  function userTweet(target, msg){
+    $("<div>", {
+      class: "me"
+    }).append(
+      $("<div>", {
+        class: "message",
+        text: msg
+      })
+    ).stop().appendTo(target);
+    scroll();
+  }
+
 
   /**
    * botがつぶやきます
@@ -89,7 +106,8 @@
     }, 1000);
     scroll();
   }
-  
+
+
   /**
    * touchend イベントの存在チェック
    * @return string "touchend" or "click"
@@ -101,6 +119,7 @@
       return "click";
     }
   }
+
 
   /**
    * HTMLエスケープ
@@ -118,7 +137,8 @@
       return TABLE_FOR_ESCAPE_HTML[match];
     });
   }
-  
+
+
   function scroll() {
     $("body, html").animate({
       "scrollTop": $(document).height()
