@@ -24,6 +24,33 @@ $json = json_encode($result);
 echo $json;
 exit;
 
+/**
+ * 回答集(CSV)から、質問に対する解答を見つけて返却する。
+ * @param $question String 質問
+ * @return $answer String 解答
+*/
 function answer($question) {
-  return $question;
+  //返却するデータを初期化。
+  $answer = "";
+
+  if ($fp = fopen("./data.csv", "r")) {
+    // 回答集を読み込んで回す。
+    while ($row = fgetcsv($fp)) {
+      if (preg_match("/" . $row[0] ."/u", $question)) {
+        $answer = $row[1];
+        break;
+      }
+    }
+  } else {
+    // 回答集がうまく読み込めない。
+    $answer = "接続エラー！調子が悪くてごめんね！";
+  }
+  
+  if ($answer === "") {
+    // 解答が見つからない場合は、とにかく謝る。謝るの大事。
+    // 社会人の基本。
+    $answer = "ごめんね、わからない！勉強しておきます！";
+  }
+  
+  return $answer;
 }
