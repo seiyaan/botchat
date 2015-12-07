@@ -71,13 +71,13 @@
    **/
   function userTweet(target, msg){
     $("<div>", {
-      class: "me"
+      class: "me tweet",
     }).append(
       $("<div>", {
         class: "message",
         text: msg
       })
-    ).stop().appendTo(target);
+    ).stop().appendTo(target).stop().fadeTo("slow", 1.0);
     scroll();
   }
 
@@ -91,7 +91,7 @@
   function botTweet(target, msg){
     setTimeout(function() {
       $("<div>", {
-        class: "com"
+        class: "com tweet"
       }).append(
         $("<div>", {
           class: "icon"
@@ -106,7 +106,7 @@
           class: "message",
           text: msg
         })
-      ).stop().appendTo(target);
+      ).stop().appendTo(target).stop().fadeTo("slow", 1.0);
     }, 1000);
     scroll();
   }
