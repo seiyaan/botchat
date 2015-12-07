@@ -33,15 +33,16 @@
       "message": message
     });
     
-    $("<div>", {
-      class: "me"
-    }).append(
+    setTimeout(function() {
       $("<div>", {
-        class: "message",
-        text: message
-      })
-    ).stop().appendTo(messageList);
-    
+        class: "me"
+      }).append(
+        $("<div>", {
+          class: "message",
+          text: message
+        })
+      ).stop().appendTo(messageList);
+    }, 1000);
     scroll();
     
     $.ajax({
@@ -74,7 +75,6 @@
             })
           ).stop().appendTo(messageList);
         }, 1000);
-        
         scroll();
       },
       error: function(XMLHttpRequest, textStatus, errorThrown){
