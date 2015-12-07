@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: YuGothic, 'ü‡ÉSÉVÉbÉN', sans-serif;
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}
+
+body {
+  background-color: #fdeff2;
+  color: #66525a;
+}
+
+div#messageListArea {
+  width: 100%;
+}
+
+div#messageListArea section#messageList {
+  margin: 0 auto;
+  width: 640px;
+  margin-bottom: 100px;
+  opacity: 0;
+}
+
+section#messageList .com {
+  display: table;
+  margin: 10px 0;
+}
+
+section#messageList .com .icon {
+  display: table-cell;
+  width: 90px;
+  text-align: left;
+}
+
+section#messageList .com .icon img {
+  border: 2px solid #ff80b0;
+  -moz-border-radius: 64px;
+  -webkit-border-radius: 64px;
+  -o-border-radius: 64px;
+  -ms-border-radius: 64px; 
+  border-radius: 64px;
+  width: 64px;
+  height: 64px;
+  margin: 10px 0 0 0;
+}
+
+section#messageList .com .message {
+  position: relative;
+  padding: 15px 10px;
+  line-height: 1.2em;
+  bottom: 28px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ff80b0;
+}
+
+section#messageList .com .message:after {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: 3px;
+  left: -20px; 
+  border: 12px solid transparent;
+  border-right: 15px solid #ffffff;
+}
+
+section#messageList .me {
+  margin: 10px 0;
+  display: table;
+  margin-left: auto;
+  text-align: right;
+}
+
+section#messageList .me .message {
+  position: relative;
+  padding: 15px 10px;
+  line-height: 1.2em;
+  border-radius: 10px;
+  background-color: #ffadcd;
+  border: 1px solid #ff80b0;
+}
+
+
+section#messageList .me .message:after {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: 3px;
+  right: -20px; 
+  border: 12px solid transparent;
+  border-left: 15px solid #ffadcd;
+}
+
+div#sendMessageArea {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background: #ffcce0 none repeat;
+  z-index: 100;
+  padding: 25px 0;
+}
+
+div#sendMessageArea section#sendMessageForm {
+  margin: 0 auto;
+  width: 600px;
+}
+
+section#sendMessageForm input#message {
+  border: 1px solid #dde0e6;
+  border-radius: 5px;
+  width: 470px;
+  height: 40px;
+  font-size: 20px;
+  padding: 0 14px;
+  margin: 0 10px 0 0;
+}
+
+section#sendMessageForm input#send {
+  background: #5685e4 none repeat;
+  border: 0px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  height: 40px;
+  width: 90px;
+}
+
+section#sendMessageForm input#send[disabled]{
+    background: #DCDCDC;
+    cursor: not-allowed;
+}
