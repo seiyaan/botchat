@@ -23,7 +23,7 @@ div#background {
   left: 50%;
   margin-left: -384px;
   position: fixed;
-  opacity: 0.7;
+  opacity: 0.3;
 }
 
 div#messageListArea {
