@@ -33,7 +33,7 @@ function answer($question) {
   //返却するデータを初期化。
   $answer = "";
 
-  if ($fp = fopen("./data.csv", "r")) {
+  if ($fp = @fopen("./data.csv", "r")) {
     // 回答集を読み込んで回す。
     while ($row = fgetcsv($fp)) {
       if (preg_match("/" . $row[0] ."/u", $question)) {
