@@ -52,27 +52,7 @@
       dataType: "json",
       scriptCharset: "utf-8",
       success: function(result, status){
-
-        setTimeout(function() {
-          $("<div>", {
-            class: "com"
-          }).append(
-            $("<div>", {
-              class: "icon"
-            }).append(
-              $("<img>", {
-                src: "./images/com_icon.png",
-                alt:"アイコン"
-              })
-            )
-          ).append(
-            $("<div>", {
-              class: "message",
-              text: result.answer
-            })
-          ).stop().appendTo(messageList);
-        }, 1000);
-        scroll();
+        botTweet(messageList, result.answer);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown){
         console.log(XMLHttpRequest);
@@ -81,7 +61,35 @@
     
   }
 
-
+  /**
+   * botがつぶやきます
+   * @param target Elem 追加先
+   * @param msg String つぶやく内容
+   * @return void
+   **/
+  function botTweet(target, msg){
+    setTimeout(function() {
+      $("<div>", {
+        class: "com"
+      }).append(
+        $("<div>", {
+          class: "icon"
+        }).append(
+          $("<img>", {
+            src: "./images/com_icon.png",
+            alt:"アイコン"
+          })
+        )
+      ).append(
+        $("<div>", {
+          class: "message",
+          text: msg
+        })
+      ).stop().appendTo(target);
+    }, 1000);
+    scroll();
+  }
+  
   /**
    * touchend イベントの存在チェック
    * @return string "touchend" or "click"
