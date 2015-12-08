@@ -1,28 +1,43 @@
 ;
 (function ($) {
   "use strict";
-  
+
   $(function () {
-    var TOUCH_EVENT = checkTouchEventType(),
-        button = $("#sendMessageForm #send"),
+    var TOGGLE_SPEED = 300,
+        TOUCH_EVENT = checkTouchEventType(),
+        sendButton = $("#sendMessageForm #send"),
         message = $("#sendMessageForm #message"),
-        messageList = $("#messageList");
+        messageList = $("#messageList"),
+        humbargerButton = $("#humbargerButton"),
+        humbarger = $("#humbarger"),
+        humbargerList = $("#humbarger ul li");
 
     if (message.val().length == 0) {
-      button.attr("disabled", "disabled");
+      sendButton.attr("disabled", "disabled");
     }
     message.bind("keydown keyup keypress change", function() {
       if ($(this).val().length > 0) {
-        button.removeAttr("disabled");
+        sendButton.removeAttr("disabled");
       } else {
-        button.attr("disabled", "disabled");
+        sendButton.attr("disabled", "disabled");
       }
     });
 
-    button.on(TOUCH_EVENT, function () {
-      sendMessage(escapeHtml(message.val()));
+    sendButton.on(TOUCH_EVENT, function () {
+      sendMessage(messageList, escapeHtml(message.val()));
       message.val("");
-      button.attr("disabled", "disabled");
+      sendButton.attr("disabled", "disabled");
+    });
+    
+    humbargerButton.on(TOUCH_EVENT, function () {
+      humbarger.stop().toggle(TOGGLE_SPEED);
+    });
+    
+    humbargerList.on(TOUCH_EVENT, function () {
+      var index = humbargerList.index(this),
+          msg = humbargerList.eq(index).text();
+      humbarger.stop().hide(TOGGLE_SPEED);
+      sendMessage(messageList, msg);
     });
     
     $('.opening').each(function(index){
@@ -32,17 +47,17 @@
 
 
   /**
-   * 送信ボタンが押された時の処理。
+   * 質問の送信を行い、回答を貰う。
+   * @param target Elem 追加先
    * @param message String 投稿の内容
    * @return void
    **/
-  function sendMessage(msg) {
-    var messageList = $("#messageList");
+  function sendMessage(target, msg) {
     var jsonMessage = JSON.stringify({
       "message": msg
     });
     
-    userTweet(messageList, msg);
+    userTweet(target, msg);
     
     $.ajax({
       type: "POST",
@@ -53,7 +68,7 @@
       dataType: "json",
       scriptCharset: "utf-8",
       success: function(result, status){
-        botTweet(messageList, result.answer);
+        botTweet(target, result.answer);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown){
         console.log(XMLHttpRequest);
@@ -89,6 +104,7 @@
    * @return void
    **/
   function botTweet(target, msg){
+    var WAIT = 1000;
     setTimeout(function() {
       $("<div>", {
         class: "com tweet"
@@ -107,7 +123,7 @@
           text: msg
         })
       ).stop().appendTo(target).stop().fadeTo("slow", 1.0);
-    }, 1000);
+    }, WAIT);
     scroll();
   }
 
