@@ -111,7 +111,11 @@
       return TABLE_FOR_ESCAPE_HTML[match];
     });
   }
-  
+
+  /**
+   * 画面下にスクロール
+   * @return void
+   **/
   function scroll() {
     $("body, html").animate({
       "scrollTop": $(document).height()
