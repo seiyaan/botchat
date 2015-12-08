@@ -3,10 +3,10 @@
   "use strict";
   
   $(function () {
-    $("#messageList").animate({"opacity":1.0}, 1000);
     var TOUCH_EVENT = checkTouchEventType(),
         button = $("#sendMessageForm #send"),
-        message = $("#sendMessageForm #message");
+        message = $("#sendMessageForm #message"),
+        messageList = $("#messageList");
 
     if (message.val().length == 0) {
       button.attr("disabled", "disabled");
@@ -24,24 +24,25 @@
       message.val("");
       button.attr("disabled", "disabled");
     });
+    
+    $('.opening').each(function(index){
+      $(this).delay(2000 * index).fadeTo("slow", 1.0);
+    });
   });
-  
-  
-  function sendMessage(message) {
+
+
+  /**
+   * 送信ボタンが押された時の処理。
+   * @param message String 投稿の内容
+   * @return void
+   **/
+  function sendMessage(msg) {
     var messageList = $("#messageList");
     var jsonMessage = JSON.stringify({
-      "message": message
+      "message": msg
     });
     
-    $("<div>", {
-      class: "me"
-    }).append(
-      $("<div>", {
-        class: "message",
-        text: message
-      })
-    ).stop().appendTo(messageList);
-    scroll();
+    userTweet(messageList, msg);
     
     $.ajax({
       type: "POST",
@@ -50,36 +51,64 @@
       contentType: 'application/json',
       chache: false,
       dataType: "json",
-      async: false,
       scriptCharset: "utf-8",
       success: function(result, status){
-
-        setTimeout(function() {
-          $("<div>", {
-            class: "com"
-          }).append(
-            $("<div>", {
-              class: "icon"
-            }).append(
-              $("<img>", {
-                src: "./images/com_icon.png",
-                alt:"アイコン"
-              })
-            )
-          ).append(
-            $("<div>", {
-              class: "message",
-              text: result.answer
-            })
-          ).stop().appendTo(messageList);
-        }, 1000);
-        scroll();
+        botTweet(messageList, result.answer);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown){
         console.log(XMLHttpRequest);
       }
     });
     
+  }
+
+
+  /**
+   * ユーザがつぶやきます
+   * @param target Elem 追加先
+   * @param msg String つぶやく内容
+   * @return void
+   **/
+  function userTweet(target, msg){
+    $("<div>", {
+      class: "me tweet",
+    }).append(
+      $("<div>", {
+        class: "message",
+        text: msg
+      })
+    ).stop().appendTo(target).stop().fadeTo("slow", 1.0);
+    scroll();
+  }
+
+
+  /**
+   * botがつぶやきます
+   * @param target Elem 追加先
+   * @param msg String つぶやく内容
+   * @return void
+   **/
+  function botTweet(target, msg){
+    setTimeout(function() {
+      $("<div>", {
+        class: "com tweet"
+      }).append(
+        $("<div>", {
+          class: "icon"
+        }).append(
+          $("<img>", {
+            src: "./images/com_icon.png",
+            alt:"アイコン"
+          })
+        )
+      ).append(
+        $("<div>", {
+          class: "message",
+          text: msg
+        })
+      ).stop().appendTo(target).stop().fadeTo("slow", 1.0);
+    }, 1000);
+    scroll();
   }
 
 
@@ -94,6 +123,7 @@
       return "click";
     }
   }
+
 
   /**
    * HTMLエスケープ
@@ -111,6 +141,7 @@
       return TABLE_FOR_ESCAPE_HTML[match];
     });
   }
+
 
   /**
    * 画面下にスクロール
