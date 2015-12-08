@@ -49,7 +49,12 @@ function answer($question) {
   if ($answer === "") {
     // 回答が見つからない場合は、とにかく謝る。謝るの大事。
     // 社会人の基本。
-    $answer = "ごめんね、わからない！勉強しておきます！";
+    $arrAnswer[] = "ごめんね、わからない！勉強しておきます！";
+    $arrAnswer[] = "ふむふむ…すこしわかりません！";
+    $arrAnswer[] = "どうしてこうなった。";
+    $arrAnswer[] = "どれどれ〜？";
+    $arrAnswer[] = "＞ω<;";
+    $answer = $arrAnswer[rand(0, count($arrAnswer) - 1)];
   }
   
   return $answer;
